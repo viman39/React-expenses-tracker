@@ -31,10 +31,20 @@ const App = () => {
     },
   ]);
 
+  let [showAddExpense, setShowAddExpense] = useState(false);
+
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
         return [expense, ...prevExpenses]
     })
+  }
+
+  const cancelAddExpense = () => {
+      setShowAddExpense(false)
+  }
+  
+  const displayAddExpense = () => {
+    setShowAddExpense(true)
   }
 
   return (
@@ -42,7 +52,7 @@ const App = () => {
       <h1>
         Expenses Tracker <small>(but cooler)</small>
       </h1>
-      <NewExpense onAddExpense={addExpenseHandler} />
+      <NewExpense onAddExpense={addExpenseHandler} showAddExpense={showAddExpense} cancelAddExpense={cancelAddExpense} displayAddExpense={displayAddExpense} />
       <Expenses 
         items={expenses}
       />

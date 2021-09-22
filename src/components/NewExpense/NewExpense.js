@@ -2,6 +2,8 @@ import './NewExpense.css'
 import ExpenseForm from './ExpenseForm'
 
 const NewExpense = (props) => {
+    const showAddExpenseForm = props.showAddExpense
+
     const saveExpenseDataHandler = (enteredExpenseData) => {
         const expenseData = {
             ...enteredExpenseData,
@@ -11,9 +13,18 @@ const NewExpense = (props) => {
         props.onAddExpense(expenseData)
     }
 
+    const cancelAddExpense = () => {
+        props.cancelAddExpense()
+    }
+
+    const displayAddExpense = () => {
+        props.displayAddExpense()
+    }
+    
     return (
         <div className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+            {showAddExpenseForm === false && <button onClick={displayAddExpense}>Add Expense!</button>}
+            {showAddExpenseForm === true && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} cancelAddExpense={cancelAddExpense}/>}
         </div>
     )
 }
